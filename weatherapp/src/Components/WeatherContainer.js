@@ -4,7 +4,6 @@ import DisplayWeather from './DisplayWeather';
 import DisplayDetails from './DisplayDetails';
 
 const apiKey ="3836d64ecc391e20540496330ccded06";
-const today = new Date();
 
 export default class WeatherContainer extends React.Component{
 
@@ -12,8 +11,9 @@ export default class WeatherContainer extends React.Component{
     {
         super(props);
 
-        this.state = {
-            weather: []
+        this.state = {                                           
+            weatherinfo: {},
+            forecastresult: {}
         };
     }
 
@@ -30,18 +30,17 @@ export default class WeatherContainer extends React.Component{
         fetch(url)
         .then(response => response.json())
         .then(data => {
-
-            this.setState({weather: data})          
+            let {weather, main, name} = data;
+            this.setState({weatherinfo: data})          
         });     
         
-        // const urlfivedays = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchvalue + "&units=metric&appid=" + apiKey;
+        const urlfivedays = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchvalue + "&units=metric&appid=" + apiKey;
 
-        // fetch(url)
-        // .then(response => response.json())
-        // .then(data => {
-
-        //     this.setState({forecastresult: data.results})          
-        // });     
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {                      
+            this.setState({forecastresult: data})          
+        });     
         
     }
 
@@ -50,12 +49,12 @@ export default class WeatherContainer extends React.Component{
         return(<React.Fragment>
 
             <SearchCity search = {this.search}/>
-            <DisplayWeather todaysweather = {this.state.weather}/>
-            {/* <DisplayDetails fivedayforecast = {this.state.forecastresult}/> */}
-
+            <DisplayWeather todaysweather = {this.state.weatherinfo}/>
+            
+            <DisplayDetails fivedayforecast = {this.state.forecastresult}/> 
         </React.Fragment>)
 
-    }
+    }    
 
 }
 
