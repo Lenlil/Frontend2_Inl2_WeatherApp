@@ -11,9 +11,9 @@ export default class WeatherContainer extends React.Component{
     {
         super(props);
 
-        this.state = {                                           
-            weatherinfo: {},
-            forecastresult: {}
+        this.state = {                                       
+            forecastinfo: {},                        
+            todayweatherinfo: {}
         };
     }
 
@@ -23,35 +23,40 @@ export default class WeatherContainer extends React.Component{
 
     }
  
-    search = (searchvalue) => {
+    search = (searchvalue) => {  
 
         const url = "https://api.openweathermap.org/data/2.5/weather?q=" + searchvalue + "&units=metric&appid=" + apiKey;
 
         fetch(url)
         .then(response => response.json())
         .then(data => {
-            let {weather, main, name} = data;
-            this.setState({weatherinfo: data})          
+            
+            // let {weather, main, name} = data;
+            this.setState({todayweatherinfo: data})   
+                
         });     
         
         const urlfivedays = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchvalue + "&units=metric&appid=" + apiKey;
 
         fetch(url)
         .then(response => response.json())
-        .then(data => {                      
-            this.setState({forecastresult: data})          
+        .then(data => {  
+            // data.list.filter(info => info.dt_txt.includes("12:00:00"));  
+            //let {weather, main, name} = data.list;                  
+            this.setState({forecastinfo: data})          
         });     
         
     }
+    
 
     render = () => {
 
         return(<React.Fragment>
 
             <SearchCity search = {this.search}/>
-            <DisplayWeather todaysweather = {this.state.weatherinfo}/>
-            
-            <DisplayDetails fivedayforecast = {this.state.forecastresult}/> 
+            <DisplayWeather todaysweather = {this.state.todayweatherinfo}/>            
+            <DisplayDetails fivedayforecast = {this.state.forecastinfo}/> 
+
         </React.Fragment>)
 
     }    
