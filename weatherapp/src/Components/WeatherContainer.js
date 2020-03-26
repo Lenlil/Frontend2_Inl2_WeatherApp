@@ -43,7 +43,7 @@ export default class WeatherContainer extends React.Component{
         .then(data => {  
             // data.list.filter(info => info.dt_txt.includes("12:00:00"));  
             //let {weather, main, name} = data.list;                  
-            this.setState({forecastinfo: data})          
+            this.setState({forecastinfo: data.list})          
         });     
         
     }
