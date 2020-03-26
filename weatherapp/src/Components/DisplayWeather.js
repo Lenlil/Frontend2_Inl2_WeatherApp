@@ -6,6 +6,7 @@ export default class DisplayWeather extends React.Component{
 
     render ()
     {      
+        //Jag behöver ha nedan för värdet för todaysweather.weather är undefined när appen startas, och den ska bara gå in i den om värdet finns. 
          let imgurl = "https://openweathermap.org/img/wn/" + (this.props.todaysweather.weather && this.props.todaysweather.weather.map(a => a.icon))  + "@2x.png";
 
         return (<React.Fragment>            
