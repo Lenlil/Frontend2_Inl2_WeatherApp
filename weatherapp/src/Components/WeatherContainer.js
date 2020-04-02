@@ -20,7 +20,6 @@ export default class WeatherContainer extends React.Component{
     componentDidMount = () => {
 
         this.search("Stockholm");
-
     }
  
     search = (searchvalue) => {  
