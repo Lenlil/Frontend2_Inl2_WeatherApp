@@ -34,7 +34,7 @@ export default class WeatherContainer extends React.Component{
                 this.setState({todayweatherinfo: data})   
                     
             })
-            .catch(error => alert("Någonting gick fel, försök igen."))                  
+            .catch(error => alert("Something went wrong."))                  
         
                
             const urlfivedays = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchvalue + "&units=metric&appid=" + apiKey;
@@ -48,7 +48,7 @@ export default class WeatherContainer extends React.Component{
                 this.setState({dayforecastinfo: filteredarray})                               
                          
             })  
-            .catch(error => alert("Din sökning finns ej, försök igen."))  
+            .catch(error => alert("No city matches your search, try again."))  
          
     }
     
